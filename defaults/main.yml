@@ -142,21 +142,6 @@ sysctl__default_parameters:
         comment: 'Enable or disable IPv4 traffic forwarding'
         state: 'present'
 
-      - name: 'net.ipv6.conf.all.forwarding'
-        value: '{{ sysctl__system_ip_forwarding_enabled|bool | ternary(1, 0) }}'
-        comment: 'Enable or disable IPv6 traffic forwarding'
-        state: 'present'
-
-      - name: 'net.ipv6.conf.all.accept_ra'
-        value: 0
-        comment: 'Ignore IPv6 RAs.'
-        state: '{{ sysctl__hardening_enabled|bool | ternary("present", "absent") }}'
-
-      - name: 'net.ipv6.conf.default.accept_ra'
-        value: 0
-        comment: 'Ignore IPv6 RAs.'
-        state: '{{ sysctl__hardening_enabled|bool | ternary("present", "absent") }}'
-
       - name: 'net.ipv4.conf.all.rp_filter'
         value: 1
         comment: 'Enable RFC-recommended source validation feature.'
@@ -195,11 +180,6 @@ sysctl__default_parameters:
           source quench, ime exceed, param problem, timestamp reply,
           information reply
         state: '{{ sysctl__hardening_enabled|bool | ternary("present", "absent") }}'
-
-      - name: 'net.ipv6.conf.all.disable_ipv6'
-        value: 1
-        comment: 'Disable IPv6.'
-        state: '{{ sysctl__hardening_ipv6_disabled|bool | ternary("present", "absent") }}'
 
       - name: 'net.ipv4.tcp_timestamps'
         value: 0
