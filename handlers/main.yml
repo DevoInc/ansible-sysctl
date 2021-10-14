@@ -1,0 +1,4 @@
+---
+
+- name: grub restart
+  command: update-grub
