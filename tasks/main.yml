@@ -112,7 +112,7 @@
   when: sysctl__register_config_created is changed or
         sysctl__register_config_removed is changed
 
-- name: Include disbale ipv6 on grub
+- name: Include disable ipv6 on grub
   include: ipv6-grub-disable.yml
   when: sysctl__hardening_ipv6_disabled
 
