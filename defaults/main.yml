@@ -176,6 +176,25 @@ sysctl__default_parameters:
     weight: 20
     options:
 
+      - name: 'net.core.netdev_max_backlog'
+        value: 16384
+        comment: |
+          Maximum number  of  packets,  queued  on  the  INPUT  side, when the interface
+          receives packets faster than kernel can process them.'
+        state: 'present'
+
+      - name: 'net.core.somaxconn'
+        value: 16384
+        state: 'present'
+
+      - name: 'net.ipv4.tcp_max_syn_backlog'
+        value: 65536
+        state: 'present'
+
+      - name: 'net.ipv4.tcp_fin_timeout'
+        value: 7
+        state: 'present'
+
       - name: 'net.ipv4.ip_forward'
         value: '{{ sysctl__system_ip_forwarding_enabled|bool | ternary(1, 0) }}'
         comment: 'Enable or disable IPv4 traffic forwarding'
